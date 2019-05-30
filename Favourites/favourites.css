@@ -33,3 +33,25 @@ ul {
     width: 100%;
     text-align: center;
 }
+
+#search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    margin-top: -70px;
+}
+
+iframe {
+        
+}
+
+html, body, main {
+    height: 100%;
+    margin: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
