@@ -1,0 +1,35 @@
+#fav-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.fav-category {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0 0 200px;
+    /*border: 1px solid red;*/
+}
+
+.fav-title {
+    width: 100%;
+    text-align: center;
+    /*border: 1px solid blue;*/
+    font-weight: bold;
+}
+
+.fav-list {
+    overflow: auto;
+    width: 100%;
+    text-align: center;
+}
