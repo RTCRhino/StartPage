@@ -1,3 +1,7 @@
+html {
+    background-color: grey;
+}
+
 #fav-container {
     display: flex;
     flex-direction: row;
@@ -20,6 +24,7 @@ ul {
     align-items: center;
     flex: 0 0 200px;
     /*border: 1px solid red;*/
+    
 }
 
 .fav-title {
@@ -33,6 +38,8 @@ ul {
     overflow: auto;
     width: 100%;
     text-align: center;
+    height: 179px;
+    transition: height 200ms ease-in-out
 }
 
 #search-container {
@@ -40,10 +47,6 @@ ul {
     justify-content: center;
     margin-bottom: 30px;
     margin-top: -70px;
-}
-
-iframe {
-        
 }
 
 html, body, main {
@@ -59,5 +62,7 @@ main {
 }
 
 .fav-hide {
-    display: none;
+    /*display: none;*/
+    height: 0;
+    overflow: none;
 }
