@@ -1,5 +1,5 @@
 html {
-    background-color: grey;
+    background-color: #121212;
 }
 
 #fav-container {
@@ -7,7 +7,7 @@ html {
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
-    max-width: 800px;
+    max-width: 850px;
 }
 
 ul {
@@ -24,7 +24,10 @@ ul {
     align-items: center;
     flex: 0 0 200px;
     /*border: 1px solid red;*/
-    
+    background-color: #1e1e1e;
+    margin: 5px;
+    border-radius: 4px;
+    border: 1px solid rgb(128, 128, 128, 0.3);
 }
 
 .fav-title {
@@ -32,6 +35,15 @@ ul {
     text-align: center;
     /*border: 1px solid blue;*/
     font-weight: bold;
+    background-color: #1e1e1e;
+    border-radius: 4px 4px 0px 0px;
+    color: #ffffff;
+    /*height: 40px;*/
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-bottom: 1px solid rgb(128, 128, 128, 0.3);
+    cursor: pointer;
 }
 
 .fav-list {
@@ -65,4 +77,54 @@ main {
     /*display: none;*/
     height: 0;
     overflow: none;
+}
+
+.fav {
+    display: block;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+a:hover, a:active {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+#search-input {
+    background-color: #1e1e1e;
+    border: 1px solid rgb(128, 128, 128, 0.3);
+    color: #ffffff;
+    height: 35px;
+    width: 400px;
+    font-size: 22px;
+    padding: 7px;
+    border-radius: 4px;
+    
+    padding-right: 55px;
+}
+
+#search-input:focus {
+    -webkit-box-shadow: 0 0px 0px rgba(0,0,0,0), 0 0 8px rgba(34,139,230,0.5);
+    box-shadow: 0 0px 0px rgba(0,0,0,0), 0 0 8px rgba(34,139,230,0.5);
+}
+
+#search-btn {
+    /*background-color: #1e1e1e;*/
+    /*border: 1px solid rgb(128, 128, 128, 0.3);*/
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 4px;
+    height: 50px;
+    font-size: 22px;
+    width: 50px;
+    border: none;
+    background: none;
+    margin-left: -55px;
+}
+
+i {
+    color: #ffffff;
 }
