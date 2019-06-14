@@ -9,10 +9,38 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <!--<link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">-->
     <link href="https://fonts.googleapis.com/css?family=Maven+Pro&display=swap" rel="stylesheet">
-    <script src="main.js"></script>
+    
 </head>
 
 <body>
+    <dialog id="newLinkDialog">
+        <form method="dialog">
+            <label>
+                Category:
+                <select>
+                    <option value="" selected disabled hidden></option>
+                    <option value="Productivity">Productivity</option>
+                    <option value="Stores">Stores</option>
+                    <option value="Subreddits">Subreddits</option>
+                    <option value="Movie_Websites">Movie Websites</option>
+                </select>
+            </label>
+            <label for="name-input">Name:</label>
+            <input type="text" id="name-input" placeholder="Name" value="None">
+            <label for="url-input">URL: </label>
+            <input type="text" id="url-input" , placeholder="URL" value="None">
+
+            <menu>
+                <button value="cancel">Cancel</button>
+                <button id="confirmBtn" value="default">Confirm</button>
+            </menu>
+        </form>
+    </dialog>
+
+    <menu>
+        <button id="updateDetails">Update details</button>
+    </menu>
+
     <main>
         <div id="search-container">
             <form action="http://google.com/search" target="_blank" autocomplete="off">
@@ -47,11 +75,16 @@
             <section class="fav-category">
                 <button onclick="favHide(event)" class="fav-title">Productivity</button>
                 <ul class="fav-list" id="category1">
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 1</a></li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 2</a></li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 3</a></li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 4</a></li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 5</a></li>
+                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 1</a>
+                    </li>
+                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 2</a>
+                    </li>
+                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 3</a>
+                    </li>
+                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 4</a>
+                    </li>
+                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 5</a>
+                    </li>
                     <!--<li class="fav-item"><a class="fav" href="#">Website 1</a></li>
                     <li class="fav-item"><a class="fav" href="#">Website 2</a></li>
                     <li class="fav-item"><a class="fav" href="#">Website 3</a></li>
@@ -66,41 +99,58 @@
             </section>
 
             <section class="fav-category">
-                    <button onclick="favHide(event)" class="fav-title">Stores</button>
+                <button onclick="favHide(event)" class="fav-title">Stores</button>
                 <ul class="fav-list">
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="https://store.steampowered.com/">Steam</a></li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="https://www.gog.com/">GOG</a></li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="https://www.amazon.co.uk/">Amazon</a></li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="https://www.chrono.gg/">Chrono.gg</a></li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="https://www.humblebundle.com/">HumbleBundle</a></li>
+                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer"
+                            href="https://store.steampowered.com/">Steam</a></li>
+                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer"
+                            href="https://www.gog.com/">GOG</a></li>
+                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer"
+                            href="https://www.amazon.co.uk/">Amazon</a></li>
+                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer"
+                            href="https://www.chrono.gg/">Chrono.gg</a></li>
+                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer"
+                            href="https://www.humblebundle.com/">HumbleBundle</a></li>
                 </ul>
             </section>
 
             <section class="fav-category">
-                    <button onclick="favHide(event)" class="fav-title">Subreddits</button>
+                <button onclick="favHide(event)" class="fav-title">Subreddits</button>
                 <ul class="fav-list">
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 1</a></li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 2</a></li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 3</a></li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 4</a></li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 5</a></li>
+                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 1</a>
+                    </li>
+                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 2</a>
+                    </li>
+                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 3</a>
+                    </li>
+                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 4</a>
+                    </li>
+                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 5</a>
+                    </li>
                 </ul>
             </section>
 
             <section class="fav-category">
-                    <button onclick="favHide(event)" class="fav-title">Movie Websites</button>
+                <button onclick="favHide(event)" class="fav-title">Movie Websites</button>
                 <ul class="fav-list">
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="https://www.netflix.com/">Netflix</a></li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="https://www.amazon.co.uk/Amazon-Video/b?&node=3010085031&ref=dvm_MLP_ROWEU_UK_1">Amazon Prime Video</a></li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="https://www5.yesmovies.gg/">Yes Movies</a></li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 4</a></li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 5</a></li>
+                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer"
+                            href="https://www.netflix.com/">Netflix</a></li>
+                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer"
+                            href="https://www.amazon.co.uk/Amazon-Video/b?&node=3010085031&ref=dvm_MLP_ROWEU_UK_1">Amazon
+                            Prime Video</a></li>
+                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer"
+                            href="https://www5.yesmovies.gg/">Yes Movies</a></li>
+                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 4</a>
+                    </li>
+                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 5</a>
+                    </li>
                 </ul>
             </section>
-            
+
         </div>
     </main>
     <!--<script src="js/main.js"></script>-->
+    <script src="main.js"></script>
 </body>
 
 </html>
