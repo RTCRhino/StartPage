@@ -1,3 +1,19 @@
+document.addEventListener('DOMContentLoaded', () => {
+  getSites();
+});
+
+function getSites() {
+  const category = ["Productivity", "Stores", "Subreddits", "Movie Websites"]
+  for (const i in category){
+    if (localStorage.getItem("Stores") !== null) {
+      var categoryJSON = JSON.parse(window.localStorage.getItem("Stores"));
+    }
+    for (var item in categoryJSON["contents"]) {
+      appendSite(categoryJSON["contents"][item].url, categoryJSON["contents"][item].name)
+    }
+  }
+}
+
 function favHide(e) {
   var category = e.target.nextElementSibling;
   if (category.className.indexOf("fav-hide") == -1) {
@@ -7,8 +23,31 @@ function favHide(e) {
   }
 }
 
-(function() {
-  debugger;
+function appendSite(url, name, category) {
+  let li = document.createElement("li");
+    li.className = "fav-item";
+
+    let anchor = document.createElement("a");
+    anchor.setAttribute("href", url);
+    anchor.innerHTML = name;
+    
+    li.appendChild(anchor);
+
+    let element = document.getElementById(category);
+    element.appendChild(li);
+}
+
+function validURL(str) {
+  var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+    '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+    '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+  return !!pattern.test(str);
+}
+
+(function () {
   var addURLDialog = document.getElementById('newLinkDialog');
   var updateButton = document.getElementById('updateDetails');
 
@@ -54,19 +93,28 @@ function favHide(e) {
       window.localStorage.setItem(category.value, JSON.stringify(categoryJSON));
       console.log(window.localStorage.getItem(category.value));
       */
+      if (category.value !== "") {
+        if (localStorage.getItem(category.value) !== null) {
+          var categoryJSON = JSON.parse(window.localStorage.getItem(category.value));
+        }
+        else {
+          var categoryJSON = {};
+          categoryJSON["name"] = category.value;
+          categoryJSON["contents"] = [];
+        }
 
-      const categoryJSON = JSON.parse(window.localStorage.getItem(category.value));
+        if (validURL(linkURL.value) === true) {
+          const newcontent = {
+            name: linkName.value,
+            url: linkURL.value,
+          }
+          categoryJSON["contents"].push(newcontent);
+          window.localStorage.setItem(category.value, JSON.stringify(categoryJSON));
+          console.log(window.localStorage.getItem(category.value));
 
-      const newcontent = {
-        name: linkName.value,
-        url: linkURL.value,
+          appendSite(linkURL.value, linkName.value, category.value);
+        }
       }
-
-      categoryJSON["contents"].push(newcontent);
-
-      window.localStorage.setItem(category.value, JSON.stringify(categoryJSON));
-
-      console.log(window.localStorage.getItem(category.value));
     }
   });
 })();

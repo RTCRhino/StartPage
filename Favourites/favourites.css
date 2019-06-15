@@ -137,3 +137,31 @@ a:hover, a:active {
 i {
     color: #dcdcdc;
 }
+
+dialog {
+    color: #dcdcdc;
+    background-color: #1e1e1e;
+    border: 1px solid rgb(128, 128, 128, 0.3);
+    border-radius: 4px 4px 4px 4px;
+}
+
+dialog::backdrop {
+    /* make the backdrop a semi-transparent black */
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+dialog + .backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#dialog-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dialog-row-container, .dialog-input-container {
+    display: flex;
+    flex-direction: row;
+}
+

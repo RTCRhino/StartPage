@@ -9,31 +9,40 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <!--<link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">-->
     <link href="https://fonts.googleapis.com/css?family=Maven+Pro&display=swap" rel="stylesheet">
-    
+
 </head>
 
 <body>
     <dialog id="newLinkDialog">
-        <form method="dialog">
-            <label>
-                Category:
-                <select>
-                    <option value="" selected disabled hidden></option>
-                    <option value="Productivity">Productivity</option>
-                    <option value="Stores">Stores</option>
-                    <option value="Subreddits">Subreddits</option>
-                    <option value="Movie_Websites">Movie Websites</option>
-                </select>
-            </label>
-            <label for="name-input">Name:</label>
-            <input type="text" id="name-input" placeholder="Name" value="None">
-            <label for="url-input">URL: </label>
-            <input type="text" id="url-input" , placeholder="URL" value="None">
-
-            <menu>
-                <button value="cancel">Cancel</button>
-                <button id="confirmBtn" value="default">Confirm</button>
-            </menu>
+        <form method="dialog" id="dialog-form">
+            <div className="dialog-row-container">
+                <label>
+                    Category:
+                    <select>
+                        <option value="" selected disabled hidden></option>
+                        <option value="Productivity">Productivity</option>
+                        <option value="Stores">Stores</option>
+                        <option value="Subreddits">Subreddits</option>
+                        <option value="Movie_Websites">Movie Websites</option>
+                    </select>
+                </label>
+            </div>
+            <div className="dialog-row-container">
+                <div className="dialog-input-container">
+                    <label for="name-input">Name:</label>
+                    <input type="text" id="name-input" placeholder="Name" value="None">
+                </div>
+                <div className="dialog-input-container">
+                    <label for="url-input">URL: </label>
+                    <input type="text" id="url-input" , placeholder="URL" value="None">
+                </div>
+            </div>
+            <div className="dialog-row-container">
+                <menu>
+                    <button value="cancel">Cancel</button>
+                    <button id="confirmBtn" value="default">Confirm</button>
+                </menu>
+            </div>
         </form>
     </dialog>
 
@@ -74,7 +83,7 @@
 
             <section class="fav-category">
                 <button onclick="favHide(event)" class="fav-title">Productivity</button>
-                <ul class="fav-list" id="category1">
+                <ul class="fav-list" id="Productivity">
                     <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 1</a>
                     </li>
                     <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 2</a>
@@ -100,8 +109,8 @@
 
             <section class="fav-category">
                 <button onclick="favHide(event)" class="fav-title">Stores</button>
-                <ul class="fav-list">
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer"
+                <ul class="fav-list" id="Stores">
+                    <!--<li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer"
                             href="https://store.steampowered.com/">Steam</a></li>
                     <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer"
                             href="https://www.gog.com/">GOG</a></li>
@@ -110,13 +119,13 @@
                     <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer"
                             href="https://www.chrono.gg/">Chrono.gg</a></li>
                     <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer"
-                            href="https://www.humblebundle.com/">HumbleBundle</a></li>
+                            href="https://www.humblebundle.com/">HumbleBundle</a></li>-->
                 </ul>
             </section>
 
             <section class="fav-category">
                 <button onclick="favHide(event)" class="fav-title">Subreddits</button>
-                <ul class="fav-list">
+                <ul class="fav-list" id="Subreddits">
                     <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 1</a>
                     </li>
                     <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 2</a>
@@ -132,7 +141,7 @@
 
             <section class="fav-category">
                 <button onclick="favHide(event)" class="fav-title">Movie Websites</button>
-                <ul class="fav-list">
+                <ul class="fav-list" id="Movie Websites">
                     <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer"
                             href="https://www.netflix.com/">Netflix</a></li>
                     <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer"
