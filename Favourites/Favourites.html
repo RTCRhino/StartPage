@@ -14,8 +14,9 @@
 
 <body>
     <dialog id="newLinkDialog">
+        <h2>Add new bookmark</h2>
         <form method="dialog" id="dialog-form">
-            <div className="dialog-row-container">
+            <div class="dialog-row-container">
                 <label>
                     Category:
                     <select>
@@ -27,18 +28,18 @@
                     </select>
                 </label>
             </div>
-            <div className="dialog-row-container">
-                <div className="dialog-input-container">
+            <div class="dialog-row-container">
+                <div class="dialog-input-container">
                     <label for="name-input">Name:</label>
-                    <input type="text" id="name-input" placeholder="Name" value="None">
+                    <input type="text" id="name-input" placeholder="Name">
                 </div>
-                <div className="dialog-input-container">
+                <div class="dialog-input-container">
                     <label for="url-input">URL: </label>
-                    <input type="text" id="url-input" , placeholder="URL" value="None">
+                    <input type="text" id="url-input" , placeholder="URL">
                 </div>
             </div>
-            <div className="dialog-row-container">
-                <menu>
+            <div class="dialog-row-container">
+                <menu class="dialog-menu">
                     <button value="cancel">Cancel</button>
                     <button id="confirmBtn" value="default">Confirm</button>
                 </menu>
@@ -84,26 +85,6 @@
             <section class="fav-category">
                 <button onclick="favHide(event)" class="fav-title">Productivity</button>
                 <ul class="fav-list" id="Productivity">
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 1</a>
-                    </li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 2</a>
-                    </li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 3</a>
-                    </li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 4</a>
-                    </li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 5</a>
-                    </li>
-                    <!--<li class="fav-item"><a class="fav" href="#">Website 1</a></li>
-                    <li class="fav-item"><a class="fav" href="#">Website 2</a></li>
-                    <li class="fav-item"><a class="fav" href="#">Website 3</a></li>
-                    <li class="fav-item"><a class="fav" href="#">Website 4</a></li>
-                    <li class="fav-item"><a class="fav" href="#">Website 5</a></li>
-                    <li class="fav-item"><a class="fav" href="#">Website 1</a></li>
-                    <li class="fav-item"><a class="fav" href="#">Website 2</a></li>
-                    <li class="fav-item"><a class="fav" href="#">Website 3</a></li>
-                    <li class="fav-item"><a class="fav" href="#">Website 4</a></li>
-                    <li class="fav-item"><a class="fav" href="#">Website 5</a></li>-->
                 </ul>
             </section>
 
@@ -126,16 +107,6 @@
             <section class="fav-category">
                 <button onclick="favHide(event)" class="fav-title">Subreddits</button>
                 <ul class="fav-list" id="Subreddits">
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 1</a>
-                    </li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 2</a>
-                    </li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 3</a>
-                    </li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 4</a>
-                    </li>
-                    <li class="fav-item"><a class="fav" target="_blank" rel="noopener noreferrer" href="#">Website 5</a>
-                    </li>
                 </ul>
             </section>
 

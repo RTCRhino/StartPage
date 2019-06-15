@@ -3,13 +3,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function getSites() {
-  const category = ["Productivity", "Stores", "Subreddits", "Movie Websites"]
+  const category = ["Productivity", "Stores", "Subreddits", "Movie Websites"];
   for (const i in category){
-    if (localStorage.getItem("Stores") !== null) {
-      var categoryJSON = JSON.parse(window.localStorage.getItem("Stores"));
+    if (localStorage.getItem(category[i]) !== null) {
+      var categoryJSON = JSON.parse(window.localStorage.getItem(category[i]));
+    }
+    else {
+      var categoryJSON = {
+        contents: []
+      }
     }
     for (var item in categoryJSON["contents"]) {
-      appendSite(categoryJSON["contents"][item].url, categoryJSON["contents"][item].name)
+      appendSite(categoryJSON["contents"][item].url, categoryJSON["contents"][item].name, category[i])
     }
   }
 }
@@ -26,10 +31,12 @@ function favHide(e) {
 function appendSite(url, name, category) {
   let li = document.createElement("li");
     li.className = "fav-item";
-
     let anchor = document.createElement("a");
     anchor.setAttribute("href", url);
     anchor.innerHTML = name;
+    anchor.className = "fav";
+    anchor.target = "_blank";
+    anchor.rel = "noopener noreferrer";
     
     li.appendChild(anchor);
 
