@@ -57,12 +57,20 @@ ul {
     transition: height 200ms ease-in-out
 }
 
-.fav-list>li {
-    margin-bottom: 2px;
-}
-
 .fav-list>li:first-child {
     margin-top: 10px;
+}
+
+.fav-item {
+    position: relative;
+}
+
+.fav-item i {
+    position: absolute;
+    right: 5px;
+    top: 22%;
+    height: 17px;
+    width: 15px;
 }
 
 #search-container {
@@ -92,6 +100,8 @@ main {
 
 .fav {
     display: block;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 a {
@@ -143,15 +153,22 @@ dialog {
     background-color: #121212; /*1e1e1e*/
     border: 1px solid rgb(128, 128, 128, 0.3);
     border-radius: 4px 4px 4px 4px;
+    width: 430px;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 dialog::backdrop {
     /* make the backdrop a semi-transparent black */
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 dialog + .backdrop {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+dialog h2 {
+    text-align: center;
 }
 
 #dialog-form {
@@ -167,12 +184,21 @@ dialog + .backdrop {
 
 .dialog-row-container {
     margin: 5px;
+    margin-bottom: 10px;
     flex-direction: column !important;
+    width: 100%;
+}
+
+.dialog-input-container {
+    align-items: center;
 }
 
 .dialog-menu {
     padding: 0px;
     margin: 0px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
 }
 
 .dialog-menu button {
@@ -181,6 +207,8 @@ dialog + .backdrop {
     color: #dcdcdc;
     border-radius: 4px;
     cursor: pointer;
+    width: 50px;
+    height: 50px;
 }
 
 dialog input, select {
@@ -188,4 +216,45 @@ dialog input, select {
     border: 1px solid rgb(128, 128, 128, 0.3);
     color: #dcdcdc;
     border-radius: 4px;
+    width: 70%;
+    height: 28px;
+}
+
+dialog label {
+    margin-right: 10px;
+    width: 30%;
+}
+
+dialog label, input, select {
+    font-size: 18px;
+}
+
+#add-website-menu {
+    position: absolute;
+    right: 25px;
+    bottom: 10px;
+}
+
+#add-website {
+    background-color: #1e1e1e;
+    border: 1px solid rgb(128, 128, 128, 0.3);
+    color: #dcdcdc;
+    border-radius: 25px;
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+}
+
+dialog button:hover {
+    background-color: #2b2b2b;
+    /*outline: -webkit-focus-ring-color auto 5px;*/
+}
+
+.fav-item i {
+    display: none;
+}
+
+.fav-item:hover i {
+    display: block;
+    cursor: pointer;
 }

@@ -17,38 +17,40 @@
         <h2>Add new bookmark</h2>
         <form method="dialog" id="dialog-form">
             <div class="dialog-row-container">
-                <label>
-                    Category:
-                    <select>
+                <div class="dialog-input-container">
+                    <label for="category-input">Category:</label>
+                    <select id="category-input">
                         <option value="" selected disabled hidden></option>
                         <option value="Productivity">Productivity</option>
                         <option value="Stores">Stores</option>
                         <option value="Subreddits">Subreddits</option>
                         <option value="Movie_Websites">Movie Websites</option>
                     </select>
-                </label>
+                </div>
             </div>
             <div class="dialog-row-container">
                 <div class="dialog-input-container">
                     <label for="name-input">Name:</label>
-                    <input type="text" id="name-input" placeholder="Name">
+                    <input type="text" id="name-input" placeholder="Name..." autocomplete="off">
                 </div>
+            </div>
+            <div class="dialog-row-container">
                 <div class="dialog-input-container">
                     <label for="url-input">URL: </label>
-                    <input type="text" id="url-input" , placeholder="URL">
+                    <input type="text" id="url-input" , placeholder="URL..." autocomplete="off">
                 </div>
             </div>
             <div class="dialog-row-container">
                 <menu class="dialog-menu">
-                    <button value="cancel">Cancel</button>
-                    <button id="confirmBtn" value="default">Confirm</button>
+                    <button value="cancel"><i class="fas fa-times"></i></button>
+                    <button id="confirmBtn" value="default"><i class="fas fa-check"></i></button>
                 </menu>
             </div>
         </form>
     </dialog>
 
-    <menu>
-        <button id="updateDetails">Update details</button>
+    <menu id="add-website-menu">
+        <button id="add-website" title="Add website"><i class="fas fa-plus"></i></button>
     </menu>
 
     <main>
