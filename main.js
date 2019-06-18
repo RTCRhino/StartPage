@@ -2,7 +2,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   getSites();
 });
-
+// const category = ["Productivity", "Stores", "Subreddits", "Movie Websites"]
+// localStorage.setItem("categories", category)
 // Runs when the site is created to add all of the sites to each categories
 function getSites() {
   if (localStorage.getItem("categories") !== null){
