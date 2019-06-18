@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Startpage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <!--<link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <dialog id="newLinkDialog">
+        <h2>Add new bookmark</h2>
+        <form method="dialog" id="dialog-form">
+            <div class="dialog-row-container">
+                <div class="dialog-input-container">
+                    <label for="category-input">Category:</label>
+                    <select id="category-input">
+                        <option value="" selected disabled hidden></option>
+                        <option value="Productivity">Productivity</option>
+                        <option value="Stores">Stores</option>
+                        <option value="Subreddits">Subreddits</option>
+                        <option value="Movie_Websites">Movie Websites</option>
+                    </select>
+                </div>
+            </div>
+            <div class="dialog-row-container">
+                <div class="dialog-input-container">
+                    <label for="name-input">Name:</label>
+                    <input type="text" id="name-input" placeholder="Name..." autocomplete="off">
+                </div>
+            </div>
+            <div class="dialog-row-container">
+                <div class="dialog-input-container">
+                    <label for="url-input">URL: </label>
+                    <input type="text" id="url-input" , placeholder="URL..." autocomplete="off">
+                </div>
+            </div>
+            <div class="dialog-row-container">
+                <menu class="dialog-menu">
+                    <button value="cancel"><i class="fas fa-times"></i></button>
+                    <button id="confirmBtn" value="default"><i class="fas fa-check"></i></button>
+                </menu>
+            </div>
+        </form>
+    </dialog>
+
+    <menu id="add-website-menu">
+        <button id="add-website" title="Add website"><i class="fas fa-plus"></i></button>
+    </menu>
+
+    <main>
+        <div id="search-container">
+            <form action="http://google.com/search" target="_blank" autocomplete="off">
+                <input id="search-input" name="q" placeholder="Google...">
+                <button type="submit" id="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+        <div id="fav-container">
+            <!--
+                Tab/page names:
+                General
+                Work
+                Gaming
+                Other
+            -->
+
+        </div>
+    </main>
+    <!--<script src="js/main.js"></script>-->
+    <script src="main.js"></script>
+</body>
+
+</html>
