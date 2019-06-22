@@ -252,11 +252,11 @@ dialog button:hover {
     cursor: pointer;
 }
 
-.category-remove-button {
+.category-remove-button, .category-edit-button {
     display: none;
 }
 
-.fav-title:hover .category-remove-button {
+.fav-title:hover .category-remove-button, .fav-title:hover .category-edit-button {
     display: block;
     background-color: transparent;
     border: none;
@@ -266,6 +266,11 @@ dialog button:hover {
     position: absolute;
     right: 5px;
     top: 9px;
+}
+
+.category-edit-button {
+    left: 5px;
+    right: unset;
 }
 
 .category-add-button {

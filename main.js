@@ -2,32 +2,26 @@
 document.addEventListener('DOMContentLoaded', () => {
   getSites();
 });
+
 // Runs when the site is created to add all of the sites to each categories
 function getSites() {
   if (localStorage.getItem("categories") !== null) {
-    var category = JSON.parse(localStorage.getItem("categories"));
+    var categoriesJSON = JSON.parse(localStorage.getItem("categories"));
   }
   else {
-    var category = [];
+    var categoriesJSON = {};
   }
-  for (const i in category) {
-    createCategory(category[i])
-    // check to see if the category exists
-    if (localStorage.getItem(category[i]) !== null) {
-      // Retrieves it from local storage
-      var categoryJSON = JSON.parse(window.localStorage.getItem(category[i]));
+  for (const categoryName in categoriesJSON) {
+    createCategory(categoryName);
+    for (const item in categoriesJSON[categoryName]["contents"]){
+      appendSite(categoriesJSON[categoryName]["contents"][item].url,
+                categoriesJSON[categoryName]["contents"][item].name,
+                categoriesJSON[categoryName]["contents"][item].id,
+                categoryName);
     }
-    else {
-      var categoryJSON = {
-        name: category[i],
-        contents: []
-      }
-    }
-    // for each item inside given category add it to the site
-    for (var item in categoryJSON["contents"]) {
-      appendSite(categoryJSON["contents"][item].url, categoryJSON["contents"][item].name, categoryJSON["contents"][item].id, category[i])
-    }
+
   }
+
   createBlankCategory();
 }
 
@@ -73,20 +67,17 @@ function addCategory() {
         // Check to see if the local storage item has been pre-created
         if (localStorage.getItem("categories") !== null) {
           // Retrieve the item from local storage
-          var categoryArray = JSON.parse(window.localStorage.getItem("categories"));
+          var categoriesJSON = JSON.parse(window.localStorage.getItem("categories"));
         }
-        // Creates a new categoryJSON
+        // Creates a new categoryiesJSON
         else {
-          var categoryArray = [];
+          var categoriesJSON = {};
         }
 
-        categoryArray.push(categoryInput.value);
-        var categoryJSON = {};
-        categoryJSON["name"] = categoryInput.value;
-        categoryJSON["contents"] = [];
+        categoriesJSON[categoryInput.value] = {};
+        categoriesJSON[categoryInput.value]["contents"] = [];
 
-        localStorage.setItem("categories", JSON.stringify(categoryArray));
-        localStorage.setItem(categoryInput.value, JSON.stringify(categoryJSON));
+        localStorage.setItem("categories", JSON.stringify(categoriesJSON));
 
         removeBlankCategory();
         createCategory(categoryInput.value);
@@ -111,7 +102,7 @@ function removeCategory(divName) {
   var categories = JSON.parse(localStorage.getItem("categories"));
   for (const i in categories){
     if (categories[i] == divName) {
-      categories.splice(i, i);
+      categories.splice(i, 1);
     }
   }
 
@@ -124,8 +115,33 @@ function removeCategory(divName) {
   
 }
 
+function editCategory(divName) {
+  /*var editCategoryDialog = document.getElementById('editCategoryDialog');
+  var categoryInput = document.getElementById('edit-category-name');
+
+  editCategoryDialog.showModal();
+
+  editCategoryDialog.addEventListener("close", function onClose() {
+    if (editCategoryDialog.returnValue == "cancel") {
+      //do nothing
+    }
+    else {
+      var categories = JSON.parse(localStorage.getItem("categories"));
+      for (const i in categories){
+        if (categories[i] == divName) {
+            //categories.splice(i, 1);
+            
+        }
+      }
+    }
+    // Resets the values of each input in the Dialog so the fields are blank when reopened
+    categoryInput.value = "";
+  });*/
+}
+
 // Creates normal category
 function createCategory(divName) {
+  //Create category section
   section = document.createElement("section");
   section.className = "fav-section";
 
@@ -139,6 +155,18 @@ function createCategory(divName) {
   titleDiv.innerHTML = divName;
   titleDiv.className = "fav-title";
 
+  //Add categort edit button
+  editButton = document.createElement("button");
+  editButton.className = "category-edit-button";
+  editButton.addEventListener("click", function() {editCategory(divName)});
+
+  editIcon = document.createElement("i");
+  editIcon.className = "fas fa-edit";
+  editButton.appendChild(editIcon);
+
+  titleDiv.appendChild(editButton);
+
+  //Add category remove button
   removeButton = document.createElement("button");
   removeButton.className = "category-remove-button";
   removeButton.addEventListener("click", function() {removeCategory(divName)});
@@ -149,11 +177,12 @@ function createCategory(divName) {
 
   titleDiv.appendChild(removeButton);
 
-  // Unordered list to store the links
+  // Add unordered list to store the links
   favList = document.createElement("ul");
   favList.className = "fav-list";
   favList.id = divName;
 
+  //Add title and list to container
   categoryDiv.appendChild(titleDiv);
   categoryDiv.appendChild(favList);
 
@@ -197,20 +226,13 @@ function createCategory(divName) {
       // Check to see if the category is not null
       if (category.value !== "") {
         // Check to see if the local storage item has been pre-created
-        if (localStorage.getItem(category.value) !== null) {
-          // Retrieve the item from local storage
-          var categoryJSON = JSON.parse(window.localStorage.getItem(category.value));
-        }
-        // Creates a new categoryJSON
-        else {
-          var categoryJSON = {};
-          categoryJSON["name"] = category.value;
-          categoryJSON["contents"] = [];
-        }
+        
+        // Retrieve the item from local storage
+        var categoriesJSON = JSON.parse(window.localStorage.getItem("categories"));
         // Checks to see if the URL is a valid
         if (validateURL(linkURL.value) === true) {
           // creates a new ID taking the contents length and adding 1
-          var linkID = categoryJSON["contents"].length + 1;
+          var linkID = categoriesJSON[category.value]["contents"].length + 1;
           // new object to add to contents containing all information for a new link
           const newcontent = {
             name: linkName.value,
@@ -218,9 +240,9 @@ function createCategory(divName) {
             id: linkID,
           }
           // Adds the new contents to the existing info
-          categoryJSON["contents"].push(newcontent);
+          categoriesJSON[category.value]["contents"].push(newcontent);
           // Stores information to local storage
-          localStorage.setItem(category.value, JSON.stringify(categoryJSON));
+          localStorage.setItem("categories", JSON.stringify(categoriesJSON));
           appendSite(linkURL.value, linkName.value, linkID, category.value);
         }
       }
@@ -259,14 +281,16 @@ function appendSite(url, name, id, category) {
 // Function to delete a site from the local storage and the website's category
 function deleteSite(url, name, id, category, listItem) {
   // Parse in JSON file from local Storage
-  var categoryJSON = JSON.parse(window.localStorage.getItem(category));
-  for (var i in categoryJSON["contents"]) {
+  var categoriesJSON = JSON.parse(window.localStorage.getItem("categories"));
+  for (var i in categoriesJSON[category]["contents"]) {
     // Check to see if the name, url and ID all match the given Object
-    if (url == categoryJSON["contents"][i]["url"] && name == categoryJSON["contents"][i]["name"] && id == categoryJSON["contents"][i]["id"]) {
+    if (url == categoriesJSON[category]["contents"][i]["url"] && 
+        name == categoriesJSON[category]["contents"][i]["name"] && 
+        id == categoriesJSON[category]["contents"][i]["id"]) {
       // Remove item from list
-      categoryJSON["contents"].splice(i, 1);
+      categoriesJSON[category]["contents"].splice(i, 1);
       // Restore the the information in local storage
-      window.localStorage.setItem(category, JSON.stringify(categoryJSON));
+      window.localStorage.setItem("categories", JSON.stringify(categoriesJSON));
       // Removes the html element
       listItem.remove();
     }

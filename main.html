@@ -63,6 +63,24 @@
         </form>
     </dialog>
 
+    <dialog id="editCategoryDialog">
+        <h2>Edit category</h2>
+        <form method="dialog" id="dialog-form">
+            <div class="dialog-row-container">
+                <div class="dialog-input-container">
+                    <label for="name-input">Name:</label>
+                    <input type="text" id="edit-category-name" placeholder="Name..." autocomplete="off">
+                </div>
+            </div>
+            <div class="dialog-row-container">
+                <menu class="dialog-menu">
+                    <button value="cancel"><i class="fas fa-times"></i></button>
+                    <button id="confirmBtn" value="default"><i class="fas fa-check"></i></button>
+                </menu>
+            </div>
+        </form>
+    </dialog>
+
     <menu id="add-website-menu">
         <button id="add-website" title="Add website"><i class="fas fa-plus"></i></button>
     </menu>
