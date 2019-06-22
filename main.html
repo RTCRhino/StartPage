@@ -21,10 +21,6 @@
                     <label for="category-input">Category:</label>
                     <select id="category-input">
                         <option value="" selected disabled hidden></option>
-                        <option value="Productivity">Productivity</option>
-                        <option value="Stores">Stores</option>
-                        <option value="Subreddits">Subreddits</option>
-                        <option value="Movie_Websites">Movie Websites</option>
                     </select>
                 </div>
             </div>
@@ -38,6 +34,24 @@
                 <div class="dialog-input-container">
                     <label for="url-input">URL: </label>
                     <input type="text" id="url-input" , placeholder="URL..." autocomplete="off">
+                </div>
+            </div>
+            <div class="dialog-row-container">
+                <menu class="dialog-menu">
+                    <button value="cancel"><i class="fas fa-times"></i></button>
+                    <button id="confirmBtn" value="default"><i class="fas fa-check"></i></button>
+                </menu>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="newCategoryDialog">
+        <h2>Add new category</h2>
+        <form method="dialog" id="dialog-form">
+            <div class="dialog-row-container">
+                <div class="dialog-input-container">
+                    <label for="name-input">Name:</label>
+                    <input type="text" id="add-category-name" placeholder="Name..." autocomplete="off">
                 </div>
             </div>
             <div class="dialog-row-container">

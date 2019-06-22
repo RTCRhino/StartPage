@@ -21,7 +21,7 @@ ul {
     padding: 0;
 }
 
-.fav-category {
+.fav-section {
     width: 200px;
     height: 200px;
     display: flex;
@@ -31,30 +31,23 @@ ul {
     margin: 10px;
 }
 
-.fav-title {
-    width: 100%;
+.fav-category {
     font-size: 13.3333px;
     text-align: center;
     font-weight: bold;
     background-color: #1e1e1e;
-    border-radius: 4px 4px 0px 0px;
+    border-radius: 4px 4px 4px 4px;
     color: #dcdcdc;
-    padding: 10px 0px 10px 0px;
     border: none;
     border: 1px solid rgb(128, 128, 128, 0.3);
     width: 200px;
+    height: 100%;
 }
 
-.fav-list {
-    overflow: auto;
-    width: 100%;
-    text-align: center;
-    height: 180px;
-    background-color: #1e1e1e;
-    border: 1px solid rgb(128, 128, 128, 0.3);
-    border-top: none;
-    border-radius: 0px 0px 4px 4px;
-    transition: height 200ms ease-in-out
+.fav-title {
+    border-bottom: 1px solid rgb(128, 128, 128, 0.3);
+    padding: 10px 0px 10px 0px;
+    position: relative;
 }
 
 .fav-list>li:first-child {
@@ -257,4 +250,45 @@ dialog button:hover {
 .fav-item:hover i {
     display: block;
     cursor: pointer;
+}
+
+.category-remove-button {
+    display: none;
+}
+
+.fav-title:hover .category-remove-button {
+    display: block;
+    background-color: transparent;
+    border: none;
+    color: #dcdcdc;
+    border-radius: 25px;
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 9px;
+}
+
+.category-add-button {
+    background-color: #1e1e1e;
+    border: 1px solid rgb(128, 128, 128, 0.3);
+    color: #dcdcdc;
+    border-radius: 35px;
+    cursor: pointer;
+    height: 65px;
+    width: 65px;
+    margin-top: -10px;
+}
+
+.category-add-button i {
+    font-size: 14px;
+}
+
+#category-add .fav-category {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.category-add-button:hover, #add-website:hover {
+    background-color: #2b2b2b;
 }
