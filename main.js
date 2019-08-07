@@ -13,11 +13,11 @@ function getSites() {
   }
   for (const categoryName in categoriesJSON) {
     createCategory(categoryName);
-    for (const item in categoriesJSON[categoryName]["contents"]){
+    for (const item in categoriesJSON[categoryName]["contents"]) {
       appendSite(categoriesJSON[categoryName]["contents"][item].url,
-                categoriesJSON[categoryName]["contents"][item].name,
-                categoriesJSON[categoryName]["contents"][item].id,
-                categoryName);
+        categoriesJSON[categoryName]["contents"][item].name,
+        categoriesJSON[categoryName]["contents"][item].id,
+        categoryName);
     }
 
   }
@@ -51,6 +51,37 @@ function createBlankCategory() {
   element.appendChild(section)
 }
 
+// Removed the add category button after adding a category.
+function removeBlankCategory() {
+  let blankCategory = document.getElementById("category-add");
+  blankCategory.parentNode.removeChild(blankCategory);
+}
+
+
+function newCategory(category) {
+  // Check to see if the category is not null
+  if (category !== "") {
+    // Check to see if the local storage item has been pre-created
+    if (localStorage.getItem("categories") !== null) {
+      // Retrieve the item from local storage
+      var categoriesJSON = JSON.parse(window.localStorage.getItem("categories"));
+    }
+    // Creates a new categoryiesJSON
+    else {
+      var categoriesJSON = {};
+    }
+
+    categoriesJSON[category] = {};
+    categoriesJSON[category]["contents"] = [];
+
+    localStorage.setItem("categories", JSON.stringify(categoriesJSON));
+
+    removeBlankCategory();
+    createCategory(category);
+    createBlankCategory();
+  }
+}
+
 function addCategory() {
   var addCategoryDialog = document.getElementById('newCategoryDialog');
   var categoryInput = document.getElementById('add-category-name');
@@ -62,47 +93,19 @@ function addCategory() {
       //do nothing
     }
     else {
-      // Check to see if the category is not null
-      if (categoryInput.value !== "") {
-        // Check to see if the local storage item has been pre-created
-        if (localStorage.getItem("categories") !== null) {
-          // Retrieve the item from local storage
-          var categoriesJSON = JSON.parse(window.localStorage.getItem("categories"));
-        }
-        // Creates a new categoryiesJSON
-        else {
-          var categoriesJSON = {};
-        }
-
-        categoriesJSON[categoryInput.value] = {};
-        categoriesJSON[categoryInput.value]["contents"] = [];
-
-        localStorage.setItem("categories", JSON.stringify(categoriesJSON));
-
-        removeBlankCategory();
-        createCategory(categoryInput.value);
-        createBlankCategory();
-
-      }
+      newCategory(categoryInput.value);
     }
     // Resets the values of each input in the Dialog so the fields are blank when reopened
     categoryInput.value = "";
   });
 }
 
-// Removed the add category button after adding a category.
-function removeBlankCategory() {
-  let blankCategory = document.getElementById("category-add");
-  blankCategory.parentNode.removeChild(blankCategory);
-}
-
 // Removed a category.
 function removeCategory(divName) {
-  localStorage.removeItem(divName);
   var categories = JSON.parse(localStorage.getItem("categories"));
-  for (const i in categories){
-    if (categories[i] == divName) {
-      categories.splice(i, 1);
+  for (const i in categories) {
+    if (i == divName) {
+      delete categories[i];
     }
   }
 
@@ -112,11 +115,11 @@ function removeCategory(divName) {
 
   let categoryOption = document.getElementById(divName + "-option");
   categoryOption.parentNode.removeChild(categoryOption);
-  
+
 }
 
 function editCategory(divName) {
-  /*var editCategoryDialog = document.getElementById('editCategoryDialog');
+  var editCategoryDialog = document.getElementById('editCategoryDialog');
   var categoryInput = document.getElementById('edit-category-name');
 
   editCategoryDialog.showModal();
@@ -126,17 +129,24 @@ function editCategory(divName) {
       //do nothing
     }
     else {
+      var categoryInputValue = document.getElementById('edit-category-name').value;
       var categories = JSON.parse(localStorage.getItem("categories"));
-      for (const i in categories){
-        if (categories[i] == divName) {
-            //categories.splice(i, 1);
-            
+      if (categories[divName])
+      {
+        debugger;
+        newCategory(categoryInput.value);
+        var categories = JSON.parse(localStorage.getItem("categories"));
+
+        for (const j in categories[divName]["contents"]) {
+          newURL(categories[divName]["contents"][j]["name"], categories[divName]["contents"][j]["url"], categoryInput.value);
         }
+        removeCategory(divName);
       }
+      
     }
     // Resets the values of each input in the Dialog so the fields are blank when reopened
-    categoryInput.value = "";
-  });*/
+    document.getElementById("edit-category-name").value = "";
+  });
 }
 
 // Creates normal category
@@ -158,7 +168,7 @@ function createCategory(divName) {
   //Add categort edit button
   editButton = document.createElement("button");
   editButton.className = "category-edit-button";
-  editButton.addEventListener("click", function() {editCategory(divName)});
+  editButton.addEventListener("click", function () { editCategory(divName) });
 
   editIcon = document.createElement("i");
   editIcon.className = "fas fa-edit";
@@ -169,7 +179,7 @@ function createCategory(divName) {
   //Add category remove button
   removeButton = document.createElement("button");
   removeButton.className = "category-remove-button";
-  removeButton.addEventListener("click", function() {removeCategory(divName)});
+  removeButton.addEventListener("click", function () { removeCategory(divName) });
 
   icon = document.createElement("i");
   icon.className = "fas fa-times";
@@ -200,6 +210,30 @@ function createCategory(divName) {
   categoryDropDown.appendChild(categoryOption);
 }
 
+function newURL(linkName, linkURL, divName) {
+  // Check to see if the local storage item has been pre-created
+
+  // Retrieve the item from local storage
+  var categoriesJSON = JSON.parse(window.localStorage.getItem("categories"));
+  // Checks to see if the URL is a valid
+  if (validateURL(linkURL) === true) {
+    // creates a new ID taking the contents length and adding 1
+    var linkID = categoriesJSON[divName]["contents"].length + 1;
+    // new object to add to contents containing all information for a new link
+    const newcontent = {
+      name: linkName,
+      url: linkURL,
+      id: linkID,
+    }
+    // Adds the new contents to the existing info
+    categoriesJSON[divName]["contents"].push(newcontent);
+    // Stores information to local storage
+    localStorage.setItem("categories", JSON.stringify(categoriesJSON));
+
+    appendSite(linkURL, linkName, linkID, divName);
+  }
+}
+
 // function which deals with the add new link Dialog
 (function () {
   var addURLDialog = document.getElementById('newLinkDialog');
@@ -225,26 +259,7 @@ function createCategory(divName) {
     else {
       // Check to see if the category is not null
       if (category.value !== "") {
-        // Check to see if the local storage item has been pre-created
-        
-        // Retrieve the item from local storage
-        var categoriesJSON = JSON.parse(window.localStorage.getItem("categories"));
-        // Checks to see if the URL is a valid
-        if (validateURL(linkURL.value) === true) {
-          // creates a new ID taking the contents length and adding 1
-          var linkID = categoriesJSON[category.value]["contents"].length + 1;
-          // new object to add to contents containing all information for a new link
-          const newcontent = {
-            name: linkName.value,
-            url: linkURL.value,
-            id: linkID,
-          }
-          // Adds the new contents to the existing info
-          categoriesJSON[category.value]["contents"].push(newcontent);
-          // Stores information to local storage
-          localStorage.setItem("categories", JSON.stringify(categoriesJSON));
-          appendSite(linkURL.value, linkName.value, linkID, category.value);
-        }
+        newURL(linkName.value, linkURL.value, category.value);
       }
     }
     // Resets the values of each input in the Dialog so the fields are blank when reopened
@@ -284,9 +299,9 @@ function deleteSite(url, name, id, category, listItem) {
   var categoriesJSON = JSON.parse(window.localStorage.getItem("categories"));
   for (var i in categoriesJSON[category]["contents"]) {
     // Check to see if the name, url and ID all match the given Object
-    if (url == categoriesJSON[category]["contents"][i]["url"] && 
-        name == categoriesJSON[category]["contents"][i]["name"] && 
-        id == categoriesJSON[category]["contents"][i]["id"]) {
+    if (url == categoriesJSON[category]["contents"][i]["url"] &&
+      name == categoriesJSON[category]["contents"][i]["name"] &&
+      id == categoriesJSON[category]["contents"][i]["id"]) {
       // Remove item from list
       categoriesJSON[category]["contents"].splice(i, 1);
       // Restore the the information in local storage
