@@ -38,7 +38,8 @@ function createBlankCategory() {
 
   button = document.createElement("button");
   button.className = "category-add-button"
-  button.addEventListener("click", function () { addCategory() });
+  button.addEventListener("click", function () { onOpenAddCategory() });
+  button.addEventListener("close", function () { onCloseAddCategory() });
 
   icon = document.createElement("i");
   icon.className = "fas fa-plus";
@@ -82,22 +83,24 @@ function newCategory(category) {
   }
 }
 
-function addCategory() {
+function onOpenAddCategory() {
+  var addCategoryDialog = document.getElementById('newCategoryDialog');
+  var categoryInput = document.getElementById('add-category-name');
+  addCategoryDialog.showModal();
+}
+
+function onCloseAddCategory() {
   var addCategoryDialog = document.getElementById('newCategoryDialog');
   var categoryInput = document.getElementById('add-category-name');
 
-  addCategoryDialog.showModal();
-
-  addCategoryDialog.addEventListener("close", function onClose() {
-    if (addCategoryDialog.returnValue == "cancel") {
-      //do nothing
-    }
-    else {
-      newCategory(categoryInput.value);
-    }
-    // Resets the values of each input in the Dialog so the fields are blank when reopened
-    categoryInput.value = "";
-  });
+  if (addCategoryDialog.returnValue == "cancel") {
+    //do nothing
+  }
+  else {
+    newCategory(categoryInput.value);
+  }
+  // Resets the values of each input in the Dialog so the fields are blank when reopened
+  categoryInput.value = "";
 }
 
 // Removed a category.
@@ -118,35 +121,39 @@ function removeCategory(divName) {
 
 }
 
-function editCategory(divName) {
+function onOpenEditCategory(divName)
+{
   var editCategoryDialog = document.getElementById('editCategoryDialog');
+  editCategoryDialog.className = divName;
+  editCategoryDialog.showModal();
+}
+
+function onCloseEditCategory()
+{
+  var editCategoryDialog = document.getElementById('editCategoryDialog');
+  var divName = editCategoryDialog.className;
   var categoryInput = document.getElementById('edit-category-name');
 
-  editCategoryDialog.showModal();
-
-  editCategoryDialog.addEventListener("close", function onClose() {
-    if (editCategoryDialog.returnValue == "cancel") {
-      //do nothing
-    }
-    else {
-      var categoryInputValue = document.getElementById('edit-category-name').value;
+  if (editCategoryDialog.returnValue == "cancel") {
+    //do nothing
+  }
+  else {
+    var categoryInputValue = document.getElementById('edit-category-name').value;
+    var categories = JSON.parse(localStorage.getItem("categories"));
+    if (categories[divName])
+    {
+      newCategory(categoryInput.value);
       var categories = JSON.parse(localStorage.getItem("categories"));
-      if (categories[divName])
-      {
-        debugger;
-        newCategory(categoryInput.value);
-        var categories = JSON.parse(localStorage.getItem("categories"));
 
-        for (const j in categories[divName]["contents"]) {
-          newURL(categories[divName]["contents"][j]["name"], categories[divName]["contents"][j]["url"], categoryInput.value);
-        }
-        removeCategory(divName);
+      for (const j in categories[divName]["contents"]) {
+        newURL(categories[divName]["contents"][j]["name"], categories[divName]["contents"][j]["url"], categoryInput.value);
       }
-      
+      removeCategory(divName);
     }
-    // Resets the values of each input in the Dialog so the fields are blank when reopened
-    document.getElementById("edit-category-name").value = "";
-  });
+    
+  }
+  // Resets the values of each input in the Dialog so the fields are blank when reopened
+  categoryInput.value = "";
 }
 
 // Creates normal category
@@ -165,10 +172,10 @@ function createCategory(divName) {
   titleDiv.innerHTML = divName;
   titleDiv.className = "fav-title";
 
-  //Add categort edit button
+  //Add category edit button
   editButton = document.createElement("button");
   editButton.className = "category-edit-button";
-  editButton.addEventListener("click", function () { editCategory(divName) });
+  editButton.addEventListener("click", function () { onOpenEditCategory(divName) });
 
   editIcon = document.createElement("i");
   editIcon.className = "fas fa-edit";
@@ -242,6 +249,8 @@ function newURL(linkName, linkURL, divName) {
   var linkName = document.getElementById("name-input");
   var linkURL = document.getElementById("url-input");
   var confirmBtn = document.getElementById('confirmBtn');
+
+  editCategoryDialog.addEventListener("close", function () { onCloseEditCategory() });
 
   // “Update details” button opens the <dialog> modally
   updateButton.addEventListener('click', function onOpen() {
