@@ -1,76 +1,12 @@
-html {
-    background-color: #121212;
-}
-
+/* ========================================================================== */
+/*  General                                                                   */
+/* ========================================================================== */
 * {
-    /*font-family: 'Varela Round', sans-serif;*/
     font-family: 'Maven Pro', sans-serif;
 }
 
-#fav-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    max-width: 890px;
-}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.fav-section {
-    width: 200px;
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: 0 0 200px;
-    margin: 10px;
-}
-
-.fav-category {
-    font-size: 13.3333px;
-    text-align: center;
-    font-weight: bold;
-    background-color: #1e1e1e;
-    border-radius: 4px 4px 4px 4px;
-    color: #dcdcdc;
-    border: none;
-    border: 1px solid rgb(128, 128, 128, 0.3);
-    width: 200px;
-    height: 100%;
-}
-
-.fav-title {
-    border-bottom: 1px solid rgb(128, 128, 128, 0.3);
-    padding: 10px 0px 10px 0px;
-    position: relative;
-}
-
-.fav-list>li:first-child {
-    margin-top: 10px;
-}
-
-.fav-item {
-    position: relative;
-}
-
-.fav-item i {
-    position: absolute;
-    right: 5px;
-    top: 22%;
-    height: 17px;
-    width: 15px;
-}
-
-#search-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 30px;
-    margin-top: -70px;
+html {
+    background-color: #121212;
 }
 
 html, body, main {
@@ -85,16 +21,10 @@ main {
     align-items: center;
 }
 
-.fav-hide {
-    height: 0;
+ul {
+    list-style-type: none;
+    margin: 0;
     padding: 0;
-    overflow: none;
-}
-
-.fav {
-    display: block;
-    padding-top: 5px;
-    padding-bottom: 5px;
 }
 
 a {
@@ -105,6 +35,17 @@ a {
 a:hover, a:active {
     color: #ffffff;
     text-decoration: underline;
+}
+
+i {
+    color: #dcdcdc;
+}
+
+/* ========================================================================== */
+/*  Search                                                                    */
+/* ========================================================================== */
+#search-form {
+    position: relative;
 }
 
 #search-input {
@@ -135,12 +76,20 @@ a:hover, a:active {
     border: none;
     background: none;
     margin-left: -55px;
+    position: absolute;
 }
 
-i {
-    color: #dcdcdc;
+#search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    margin-top: -70px;
 }
 
+
+/* ========================================================================== */
+/*  Dialog                                                                    */
+/* ========================================================================== */
 dialog {
     color: #dcdcdc;
     background-color: #121212; /*1e1e1e*/
@@ -222,6 +171,15 @@ dialog label, input, select {
     font-size: 18px;
 }
 
+dialog button:hover {
+    background-color: #2b2b2b;
+}
+
+
+
+/* ========================================================================== */
+/*  Fav categories                                                            */
+/* ========================================================================== */
 #add-website-menu {
     position: absolute;
     right: 25px;
@@ -238,11 +196,6 @@ dialog label, input, select {
     width: 50px;
 }
 
-dialog button:hover {
-    background-color: #2b2b2b;
-    /*outline: -webkit-focus-ring-color auto 5px;*/
-}
-
 .fav-item i {
     display: none;
 }
@@ -250,6 +203,71 @@ dialog button:hover {
 .fav-item:hover i {
     display: block;
     cursor: pointer;
+}
+
+.fav-hide {
+    height: 0;
+    padding: 0;
+    overflow: none;
+}
+
+.fav {
+    display: block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.fav-section {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0 0 200px;
+    margin: 10px;
+}
+
+.fav-category {
+    font-size: 13.3333px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #1e1e1e;
+    border-radius: 4px 4px 4px 4px;
+    color: #dcdcdc;
+    border: none;
+    border: 1px solid rgb(128, 128, 128, 0.3);
+    width: 200px;
+    height: 100%;
+}
+
+.fav-title {
+    border-bottom: 1px solid rgb(128, 128, 128, 0.3);
+    padding: 10px 0px 10px 0px;
+    position: relative;
+}
+
+.fav-list>li:first-child {
+    margin-top: 10px;
+}
+
+.fav-item {
+    position: relative;
+}
+
+.fav-item i {
+    position: absolute;
+    right: 5px;
+    top: 22%;
+    height: 17px;
+    width: 15px;
+}
+
+#fav-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 890px;
 }
 
 .category-remove-button, .category-edit-button {
